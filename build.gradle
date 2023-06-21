@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	//id 'maven'
+	id 'org.jetbrains.kotlin.jvm' version '1.8.21'
+}
+version '1.0'
+
+/* 使用Java11做标准语法并编译 */
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileKotlin {
+	kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+}
+compileTestKotlin {
+	kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+}
+
+repositories{
+	maven{ url "https://maven.aliyun.com/nexus/content/groups/public/"}
+	mavenCentral()
+	maven{ url 'https://jitpack.io' }
+}
+
+dependencies{
+	//compileOnly group: 'com.github.RW-HPS.RW-HPS', name: 'Server', version: 'master-SNAPSHOT'
+	//compileOnly group: 'com.github.RW-HPS', name: 'RW-HPS', version: '-SNAPSHOT'
+	compileOnly "com.github.RW-HPS.RW-HPS:Server-Core:2.0.0"
+
+}
+
+jar{
+	// Fuck Java 9
+	exclude("META-INF/version/**")
+	exclude("**/module-info.class")
+
+	from{
+		configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}
+	}
+}
+
+tasks.withType(JavaCompile) {  
+	options.encoding = "UTF-8"  
+	options.compilerArgs << "-Xlint:unchecked" << "-Werror"
+	options.compilerArgs << "-Xdiags:verbose" << "-Werror"
+	options.compilerArgs << "-Xlint:deprecation" << "-Werror"
+}
