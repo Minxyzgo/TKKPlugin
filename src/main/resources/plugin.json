@@ -1,8 +1,8 @@
 {
-  "name": "example",
-  "author": "Dr",
-  "main": "example.Main",
-  "description": "example",
+  "name": "RWPP Protocol Support Plugin",
+  "author": "Minxyzgo",
+  "main": "net.rwhps.plugin.rwpp.Main",
+  "description": "RWPP Protocol Support 允许RW-HPS支持RWPP协议",
   "version": "1.0.0",
-  "supportedVersions": ">= 5.4.0"
+  "supportedVersions": ">= 3.0.0"
 }

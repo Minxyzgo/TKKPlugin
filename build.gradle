@@ -1,32 +1,27 @@
 plugins {
 	id 'java'
-	//id 'maven'
-	id 'org.jetbrains.kotlin.jvm' version '1.8.21'
+	id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
 version '1.0'
 
-/* 使用Java11做标准语法并编译 */
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
-
 compileKotlin {
-	kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+	kotlinOptions.jvmTarget = JavaVersion.VERSION_21
 }
 compileTestKotlin {
-	kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+	kotlinOptions.jvmTarget = JavaVersion.VERSION_21
 }
 
 repositories{
-	maven{ url "https://maven.aliyun.com/nexus/content/groups/public/"}
-	mavenCentral()
+	maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
 	maven{ url 'https://jitpack.io' }
+	mavenCentral()
+	google()
 }
 
 dependencies{
-	//compileOnly group: 'com.github.RW-HPS.RW-HPS', name: 'Server', version: 'master-SNAPSHOT'
-	//compileOnly group: 'com.github.RW-HPS', name: 'RW-HPS', version: '-SNAPSHOT'
-	compileOnly "com.github.RW-HPS.RW-HPS:Server-Core:2.0.0"
-
+	compileOnly "com.github.Minxyzgo.RW-HPS:Server-Core:b0af9b77be"
+	compileOnly fileTree(dir: '/libs', includes: ['*.jar'])
+	testImplementation "com.github.Minxyzgo.RW-HPS:Server-Core:b0af9b77be"
 }
 
 jar{
